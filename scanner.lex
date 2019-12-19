@@ -1,6 +1,6 @@
 %{
   extern "C" int yylex();
-  #include "parser.tab.c"  // to get the token types from Bison
+  extern "C" yylval;
 %}
 
 %%
