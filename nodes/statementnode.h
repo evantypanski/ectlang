@@ -6,7 +6,7 @@
 
 class StatementNode: public Node {
     public:
-        StatementNode(int line, int pos, ExpNode *exp);
+        StatementNode(int line, ExpNode *exp);
         ExpNode* getExp();
         void accept(class Visitor &v);
 

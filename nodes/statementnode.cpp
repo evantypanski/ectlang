@@ -3,8 +3,8 @@
 #include "statementnode.h"
 #include "visitor.h"
 
-StatementNode::StatementNode(int line, int pos, ExpNode *exp) :
-    Node(line, pos), exp(exp) {}
+StatementNode::StatementNode(int line, ExpNode *exp) :
+    Node(line), exp(exp) {}
 
 ExpNode* StatementNode::getExp() {
     return exp;

@@ -5,7 +5,7 @@
 
 class ProgramNode: public Node {
     public:
-        ProgramNode(int line, int pos, StatementNode *exp);
+        ProgramNode(int line, StatementNode *exp);
         StatementNode* getStatement();
         void accept(class Visitor &v);
 

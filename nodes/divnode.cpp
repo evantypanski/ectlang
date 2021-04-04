@@ -3,8 +3,8 @@
 #include "divnode.h"
 #include "visitor.h"
 
-DivNode::DivNode(int line, int pos, ExpNode *left, ExpNode *right) :
-    ExpNode(line, pos), left(left), right(right) {}
+DivNode::DivNode(int line, ExpNode *left, ExpNode *right) :
+    ExpNode(line), left(left), right(right) {}
 
 ExpNode* DivNode::getLeft() {
     return left;

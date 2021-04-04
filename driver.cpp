@@ -11,7 +11,7 @@
 
 using namespace std;
 
-FILE *yyin;
+extern FILE *yyin;
 int yyparse();
 
 int main(int argc, char **argv) {

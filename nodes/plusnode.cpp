@@ -3,8 +3,8 @@
 #include "plusnode.h"
 #include "visitor.h"
 
-PlusNode::PlusNode(int line, int pos, ExpNode *left, ExpNode *right) :
-    ExpNode(line, pos), left(left), right(right) {}
+PlusNode::PlusNode(int line, ExpNode *left, ExpNode *right) :
+    ExpNode(line), left(left), right(right) {}
 
 ExpNode* PlusNode::getLeft() {
     return left;

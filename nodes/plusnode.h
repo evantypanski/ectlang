@@ -5,7 +5,7 @@
 
 class PlusNode: public ExpNode {
     public:
-        PlusNode(int line, int pos, ExpNode *left, ExpNode *right);
+        PlusNode(int line, ExpNode *left, ExpNode *right);
         ExpNode* getLeft();
         ExpNode* getRight();
         void accept(class Visitor &v);

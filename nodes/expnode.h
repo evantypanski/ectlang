@@ -5,7 +5,7 @@
 
 class ExpNode: public Node {
     public:
-        ExpNode(int line, int pos);
+        ExpNode(int line);
 };
 
 #endif

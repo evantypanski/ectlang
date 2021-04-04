@@ -3,8 +3,8 @@
 #include "integernode.h"
 #include "visitor.h"
 
-IntegerNode::IntegerNode(int line, int pos, int value) :
-    ExpNode(line, pos), value(value) {}
+IntegerNode::IntegerNode(int line, int value) :
+    ExpNode(line), value(value) {}
 
 int IntegerNode::getValue() {
     return value;

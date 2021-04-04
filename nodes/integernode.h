@@ -5,7 +5,7 @@
 
 class IntegerNode: public ExpNode {
     public:
-        IntegerNode(int left, int right, int value);
+        IntegerNode(int line, int value);
         int getValue();
         void accept(class Visitor &v);
 

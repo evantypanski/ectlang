@@ -1,7 +1,10 @@
 %{
+#include "parser.tab.hpp"
   extern "C" int yylex();
-  extern "C" yylval;
+  //extern yylval;
 %}
+%option noyywrap
+%option yylineno
 
 %%
 [0-9]+        { yylval.intVal = atoi(yytext); return INTEGER_LITERAL; }

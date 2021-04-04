@@ -3,13 +3,12 @@
 
 class Node {
     public:
-        Node(int line, int pos);
+        Node(int line);
         int getLine();
-        int getPos();
         virtual void accept(class Visitor &v) = 0;
 
     private:
-        int line, pos;
+        int line;
 };
 
 #endif

@@ -5,7 +5,7 @@
 
 class MultNode: public ExpNode {
     public:
-        MultNode(int line, int pos, ExpNode *left, ExpNode *right);
+        MultNode(int line, ExpNode *left, ExpNode *right);
         ExpNode* getLeft();
         ExpNode* getRight();
         void accept(class Visitor &v);

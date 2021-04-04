@@ -5,7 +5,7 @@
 
 class FloatNode: public ExpNode {
     public:
-        FloatNode(int line, int pos, float value);
+        FloatNode(int line, float value);
         void accept(class Visitor &v);
         float getValue();
 

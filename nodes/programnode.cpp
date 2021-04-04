@@ -3,8 +3,8 @@
 #include "programnode.h"
 #include "visitor.h"
 
-ProgramNode::ProgramNode(int line, int pos, StatementNode *statement) :
-    Node(line, pos), statement(statement) {}
+ProgramNode::ProgramNode(int line, StatementNode *statement) :
+    Node(line), statement(statement) {}
 
 StatementNode* ProgramNode::getStatement() {
     return statement;

@@ -3,8 +3,8 @@
 #include "multnode.h"
 #include "visitor.h"
 
-MultNode::MultNode(int line, int pos, ExpNode *left, ExpNode *right) :
-    ExpNode(line, pos), left(left), right(right) {}
+MultNode::MultNode(int line, ExpNode *left, ExpNode *right) :
+    ExpNode(line), left(left), right(right) {}
 
 ExpNode* MultNode::getLeft() {
     return left;
