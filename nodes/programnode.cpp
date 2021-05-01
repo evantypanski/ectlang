@@ -3,11 +3,14 @@
 #include "programnode.h"
 #include "visitor.h"
 
-ProgramNode::ProgramNode(int line, StatementNode *statement) :
-    Node(line), statement(statement) {}
+ProgramNode::ProgramNode(int line) : Node(line) {}
 
-StatementNode* ProgramNode::getStatement() {
-    return statement;
+void ProgramNode::addStatement(StatementNode *statement) {
+    statements.push_back(statement);
+}
+
+std::vector<StatementNode *> ProgramNode::getStatements() {
+    return statements;
 }
 
 void ProgramNode::accept(Visitor &v) {

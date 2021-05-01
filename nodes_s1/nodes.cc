@@ -1,29 +1,29 @@
 #include <iostream>
 
 class Node {
-    public:
-        virtual void accept(class Visitor &v) = 0;
+public:
+    virtual void accept(class Visitor &v) = 0;
 };
 
 
 class IntegerNode: public Node {
-    public:
-        IntegerNode(int value);
-        void accept(Visitor &v);
-        int value;
+public:
+    IntegerNode(int value);
+    void accept(Visitor &v);
+    int value;
 };
 
 class PlusNode: public Node {
-    public:
-        PlusNode(IntegerNode left, IntegerNode right);
-        void accept(Visitor &v);
-        IntegerNode left, right;
+public:
+    PlusNode(IntegerNode left, IntegerNode right);
+    void accept(Visitor &v);
+    IntegerNode left, right;
 };
 
 class Visitor {
-    public:
-        void visit(IntegerNode *node);
-        void visit(PlusNode *node);
+public:
+    void visit(IntegerNode *node);
+    void visit(PlusNode *node);
 };
 
 IntegerNode::IntegerNode(int value) : value(value) {}

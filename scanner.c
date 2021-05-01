@@ -473,9 +473,8 @@ char *yytext;
 #line 2 "scanner.lex"
 #include "parser.tab.hpp"
   extern "C" int yylex();
-  //extern yylval;
+#line 477 "scanner.c"
 #line 478 "scanner.c"
-#line 479 "scanner.c"
 
 #define INITIAL 0
 
@@ -692,9 +691,9 @@ YY_DECL
 		}
 
 	{
-#line 9 "scanner.lex"
+#line 8 "scanner.lex"
 
-#line 698 "scanner.c"
+#line 697 "scanner.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -763,51 +762,51 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 10 "scanner.lex"
+#line 9 "scanner.lex"
 { yylval.intVal = atoi(yytext); return INTEGER_LITERAL; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 11 "scanner.lex"
+#line 10 "scanner.lex"
 { yylval.floatVal = atof(yytext); return FLOAT_LITERAL; }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 12 "scanner.lex"
+#line 11 "scanner.lex"
 { return PLUS; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 13 "scanner.lex"
+#line 12 "scanner.lex"
 { return MINUS; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 14 "scanner.lex"
+#line 13 "scanner.lex"
 { return MULT; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 15 "scanner.lex"
+#line 14 "scanner.lex"
 { return DIV; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 16 "scanner.lex"
+#line 15 "scanner.lex"
 { return SEMI; }
 	YY_BREAK
 case 8:
 /* rule 8 can match eol */
 YY_RULE_SETUP
-#line 17 "scanner.lex"
+#line 16 "scanner.lex"
 ; /* ignore whitespace */
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 19 "scanner.lex"
+#line 18 "scanner.lex"
 ECHO;
 	YY_BREAK
-#line 811 "scanner.c"
+#line 810 "scanner.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1824,4 +1823,4 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 19 "scanner.lex"
+#line 18 "scanner.lex"

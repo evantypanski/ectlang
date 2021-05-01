@@ -4,8 +4,8 @@
 #include "node.h"
 
 class ExpNode: public Node {
-    public:
-        ExpNode(int line);
+public:
+    ExpNode(int line);
 };
 
 #endif

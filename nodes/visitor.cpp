@@ -4,7 +4,8 @@
 
 void Visitor::visit(ProgramNode *node) {
     std::cout << "Program" << std::endl;
-    node->getStatement()->accept(*this);
+    for (auto statement : node->getStatements())
+        statement->accept(*this);
 }
 
 void Visitor::visit(StatementNode *node) {

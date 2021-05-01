@@ -5,13 +5,13 @@
 #include "node.h"
 
 class StatementNode: public Node {
-    public:
-        StatementNode(int line, ExpNode *exp);
-        ExpNode* getExp();
-        void accept(class Visitor &v);
+public:
+    StatementNode(int line, ExpNode *exp);
+    ExpNode* getExp();
+    void accept(class Visitor &v);
 
-    private:
-        ExpNode *exp;
+private:
+    ExpNode *exp;
 };
 
 #endif

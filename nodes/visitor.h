@@ -11,15 +11,15 @@
 #include "floatnode.h"
 
 class Visitor {
-    public:
-        void visit(ProgramNode *node);
-        void visit(StatementNode *node);
-        void visit(IntegerNode *node);
-        void visit(FloatNode *node);
-        void visit(PlusNode *node);
-        void visit(MinusNode *node);
-        void visit(MultNode *node);
-        void visit(DivNode *node);
+public:
+    virtual void visit(ProgramNode *node);
+    virtual void visit(StatementNode *node);
+    virtual void visit(IntegerNode *node);
+    virtual void visit(FloatNode *node);
+    virtual void visit(PlusNode *node);
+    virtual void visit(MinusNode *node);
+    virtual void visit(MultNode *node);
+    virtual void visit(DivNode *node);
 };
 
 #endif

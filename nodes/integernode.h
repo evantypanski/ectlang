@@ -4,13 +4,13 @@
 #include "expnode.h"
 
 class IntegerNode: public ExpNode {
-    public:
-        IntegerNode(int line, int value);
-        int getValue();
-        void accept(class Visitor &v);
+public:
+    IntegerNode(int line, int value);
+    int getValue();
+    void accept(class Visitor &v);
 
-    private:
-        int value;
+private:
+    int value;
 };
 
 #endif

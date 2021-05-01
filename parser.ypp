@@ -1,4 +1,5 @@
 %{
+  #include <assert.h>
   #include <iostream>
   #include "nodes/node.h"
   #include "nodes/minusnode.h"
@@ -44,8 +45,9 @@
 
 %%
 
-program: statement	{ program = new ProgramNode(yylineno, $1); }
-       ;
+program: { program = new ProgramNode(yylineno); }
+    | program statement	{ assert(program); program->addStatement($2); }
+    ;
 
 statement: exp SEMI { $$ = new StatementNode(yylineno, $1); }
          ;

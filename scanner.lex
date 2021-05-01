@@ -1,7 +1,6 @@
 %{
 #include "parser.tab.hpp"
   extern "C" int yylex();
-  //extern yylval;
 %}
 %option noyywrap
 %option yylineno

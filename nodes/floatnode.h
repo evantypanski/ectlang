@@ -4,13 +4,13 @@
 #include "expnode.h"
 
 class FloatNode: public ExpNode {
-    public:
-        FloatNode(int line, float value);
-        void accept(class Visitor &v);
-        float getValue();
+public:
+    FloatNode(int line, float value);
+    void accept(class Visitor &v);
+    float getValue();
 
-    private:
-        float value;
+private:
+    float value;
 };
 
 #endif
