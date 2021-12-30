@@ -38,6 +38,7 @@ private:
 
     // The "return value" from the previous visit method.
     llvm::Value *ret;
+    bool floatInst;
 };
 
 #endif

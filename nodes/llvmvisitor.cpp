@@ -17,6 +17,7 @@ LLVMVisitor::LLVMVisitor(llvm::raw_fd_ostream &out,
                        std::unique_ptr<llvm::Module> &mod) :
         out(out), context(context), mod(mod), builder(context) {
     ret = nullptr;
+    floatInst = false;
 }
 
 void LLVMVisitor::visit(ProgramNode *node) {
@@ -62,10 +63,21 @@ void LLVMVisitor::visit(StatementNode *node) {
 
     // Call printf with our returned value.
     std::vector<llvm::Value *> printArgs;
-    llvm::Value *formatStr = builder.CreateGlobalStringPtr("%d\n");
+
+    // Change the format string depending on if we're dealing with a float or not.
+    llvm::Value *formatStr;
+    if (floatInst) {
+        formatStr = builder.CreateGlobalStringPtr("%f\n");
+    } else {
+        formatStr = builder.CreateGlobalStringPtr("%d\n");
+    }
+
     printArgs.push_back(formatStr);
     printArgs.push_back(ret);
     builder.CreateCall(mod->getFunction("printf"), printArgs);
+
+    // Reset the float instruction marker.
+    floatInst = false;
 }
 
 void LLVMVisitor::visit(IntegerNode *node) {
@@ -74,8 +86,10 @@ void LLVMVisitor::visit(IntegerNode *node) {
 }
 
 void LLVMVisitor::visit(FloatNode *node) {
-    // Append the float to the file.
-    //file << node->getValue();
+    // Return the LLVM float value.
+    ret = llvm::ConstantFP::get(llvm::Type::getDoubleTy(context), node->getValue());
+    // Mark that we're now dealing with a float.
+    floatInst = true;
 }
 
 void LLVMVisitor::visit(PlusNode *node) {
@@ -87,27 +101,89 @@ void LLVMVisitor::visit(PlusNode *node) {
     node->getRight()->accept(*this);
     llvm::Value *rhs = ret;
 
-    // Return the add.
-    ret = builder.CreateAdd(lhs, rhs);
+    if (floatInst) {
+        // Promote RHS or LHS if we're dealing with floats and they're not a float.
+        // (except we use doubles)
+        if (!lhs->getType()->isDoubleTy())
+            lhs = builder.CreateSIToFP(lhs, llvm::Type::getDoubleTy(context));
+        if (!rhs->getType()->isDoubleTy())
+            rhs = builder.CreateSIToFP(rhs, llvm::Type::getDoubleTy(context));
+
+        ret = builder.CreateFAdd(lhs, rhs);
+    } else {
+        // Otherwise we're just doing an integer add.
+        ret = builder.CreateAdd(lhs, rhs);
+    }
 }
 
 void LLVMVisitor::visit(MinusNode *node) {
-    // Append the subtraction to the file.
+    // Get the return value from the left side.
     node->getLeft()->accept(*this);
-    //file << " - ";
+    llvm::Value *lhs = ret;
+
+    // Get the return value from the right side.
     node->getRight()->accept(*this);
+    llvm::Value *rhs = ret;
+
+    if (floatInst) {
+        // Promote RHS or LHS if we're dealing with floats and they're not a float.
+        // (except we use doubles)
+        if (!lhs->getType()->isDoubleTy())
+            lhs = builder.CreateSIToFP(lhs, llvm::Type::getDoubleTy(context));
+        if (!rhs->getType()->isDoubleTy())
+            rhs = builder.CreateSIToFP(rhs, llvm::Type::getDoubleTy(context));
+
+        ret = builder.CreateFSub(lhs, rhs);
+    } else {
+        // Otherwise we're just doing an integer add.
+        ret = builder.CreateSub(lhs, rhs);
+    }
 }
 
 void LLVMVisitor::visit(MultNode *node) {
-    // Append the multiplication to the file.
+    // Get the return value from the left side.
     node->getLeft()->accept(*this);
-    //file << " * ";
+    llvm::Value *lhs = ret;
+
+    // Get the return value from the right side.
     node->getRight()->accept(*this);
+    llvm::Value *rhs = ret;
+
+    if (floatInst) {
+        // Promote RHS or LHS if we're dealing with floats and they're not a float.
+        // (except we use doubles)
+        if (!lhs->getType()->isDoubleTy())
+            lhs = builder.CreateSIToFP(lhs, llvm::Type::getDoubleTy(context));
+        if (!rhs->getType()->isDoubleTy())
+            rhs = builder.CreateSIToFP(rhs, llvm::Type::getDoubleTy(context));
+
+        ret = builder.CreateFMul(lhs, rhs);
+    } else {
+        // Otherwise we're just doing an integer add.
+        ret = builder.CreateMul(lhs, rhs);
+    }
 }
 
 void LLVMVisitor::visit(DivNode *node) {
-    // Append the division to the file.
+    // Get the return value from the left side.
     node->getLeft()->accept(*this);
-    //file << " / ";
+    llvm::Value *lhs = ret;
+
+    // Get the return value from the right side.
     node->getRight()->accept(*this);
+    llvm::Value *rhs = ret;
+
+    if (floatInst) {
+        // Promote RHS or LHS if we're dealing with floats and they're not a float.
+        // (except we use doubles)
+        if (!lhs->getType()->isDoubleTy())
+            lhs = builder.CreateSIToFP(lhs, llvm::Type::getDoubleTy(context));
+        if (!rhs->getType()->isDoubleTy())
+            rhs = builder.CreateSIToFP(rhs, llvm::Type::getDoubleTy(context));
+
+        ret = builder.CreateFDiv(lhs, rhs);
+    } else {
+        // Otherwise we're just doing an integer add.
+        ret = builder.CreateSDiv(lhs, rhs);
+    }
 }
